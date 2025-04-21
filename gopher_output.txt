@@ -1,0 +1,285 @@
+[2025-04-18 18:29:06] -> Requesting: ''
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:06] -> Requesting: '/rfc1436.txt'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:06] -> Requesting: '/acme'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:06] -> Requesting: '/acme/about'
+[2025-04-18 18:29:06] -> Requesting: '/acme/products'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:06] -> Requesting: '/acme/products/anvils'
+[2025-04-18 18:29:06] -> Requesting: '/acme/products/pianos'
+[2025-04-18 18:29:07] -> Requesting: '/acme/products/paint'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:07] -> Requesting: '/acme/products/traps'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:08] -> Requesting: '/acme/contact'
+[2025-04-18 18:29:08] -> Requesting: '/maze/17'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:09] -> Requesting: '/maze/18'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:09] -> Requesting: '/maze/19'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:09] -> Requesting: '/maze/statuette'
+[2025-04-18 18:29:09] -> Requesting: '/maze/floppy'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:09] -> Requesting: '/maze/20'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:10] -> Requesting: '/maze/21'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:10] -> Requesting: '/maze/22'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:10] -> Requesting: '/maze/23'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:10] -> Requesting: '/misc'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:11] -> Requesting: '/misc/empty'
+[2025-04-18 18:29:11] -> Requesting: '/misc/empty.txt'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:11] -> Requesting: '/misc/nesta'
+[2025-04-18 18:29:11] -> Requesting: '/misc/nestb'
+[2025-04-18 18:29:11] -> Requesting: '/misc/nestc'
+[2025-04-18 18:29:12] -> Requesting: '/misc/nestd'
+[2025-04-18 18:29:12] -> Requesting: '/misc/neste'
+[2025-04-18 18:29:12] -> Requesting: '/misc/nestf'
+[2025-04-18 18:29:12] -> Requesting: '/misc/nestg'
+[2025-04-18 18:29:13] -> Requesting: '/misc/nesth'
+[2025-04-18 18:29:13] -> Requesting: '/misc/nesti'
+[2025-04-18 18:29:13] -> Requesting: '/misc/nestj'
+[2025-04-18 18:29:13] -> Requesting: '/misc/nestk'
+[2025-04-18 18:29:13] -> Requesting: '/misc/nestl'
+[2025-04-18 18:29:14] -> Requesting: '/misc/nestm'
+[2025-04-18 18:29:14] -> Requesting: '/misc/nestn'
+[2025-04-18 18:29:14] -> Requesting: '/misc/nesto'
+[2025-04-18 18:29:14] -> Requesting: '/misc/nestp'
+[2025-04-18 18:29:15] -> Requesting: '/misc/nestq'
+[2025-04-18 18:29:15] -> Requesting: '/misc/nestr'
+[2025-04-18 18:29:15] -> Requesting: '/misc/nests'
+[2025-04-18 18:29:15] -> Requesting: '/misc/nestt'
+[2025-04-18 18:29:15] -> Requesting: '/misc/nestu'
+[2025-04-18 18:29:17] -> Requesting: '/misc/nestv'
+[2025-04-18 18:29:17] -> Requesting: '/misc/nestw'
+[2025-04-18 18:29:17] -> Requesting: '/misc/nestx'
+[2025-04-18 18:29:17] -> Requesting: '/misc/nesty'
+[2025-04-18 18:29:17] -> Requesting: '/misc/nestz'
+[2025-04-18 18:29:18] -> Requesting: '/misc/nonexistent'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: /misc/binary
+[DEBUG] Finished fetch: /misc/binary
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: /misc/encabulator.jpeg
+[DEBUG] Finished fetch: /misc/encabulator.jpeg
+[2025-04-18 18:29:18] -> Requesting: '/misc/loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:23] -> Requesting: '/misc/more'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[2025-04-18 18:29:23] -> Requesting: '/misc/malformed1'
+[2025-04-18 18:29:23] -> Requesting: '/misc/malformed2'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[SKIP] Known problematic selector skipped: /misc/firehose
+[2025-04-18 18:29:23] -> Requesting: '/misc/tarpit'
+[2025-04-18 18:29:38] -> Requesting: '/misc/godot'
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+[DEBUG] Starting fetch: 
+[firehose guard] Connection error on : [Errno 8] nodename nor servname provided, or not known
+[DEBUG] Finished fetch: 
+
+----- Summary -----
+Directories: 41
+Text files: 12
+  TEXT: comp3310.ddns.net:70/rfc1436.txt
+  TEXT: comp3310.ddns.net:70/acme/about
+  TEXT: comp3310.ddns.net:70/acme/products/anvils
+  TEXT: comp3310.ddns.net:70/acme/products/pianos
+  TEXT: comp3310.ddns.net:70/acme/products/paint
+  TEXT: comp3310.ddns.net:70/acme/contact
+  TEXT: comp3310.ddns.net:70/maze/statuette
+  TEXT: comp3310.ddns.net:70/maze/floppy
+  TEXT: comp3310.ddns.net:70/misc/empty.txt
+  TEXT: comp3310.ddns.net:70/misc/nestz
+  TEXT: comp3310.ddns.net:70/misc/loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
+  TEXT: comp3310.ddns.net:70/misc/malformed2
+Binary files: 2
+  BIN: comp3310.ddns.net:70/misc/binary
+  BIN: comp3310.ddns.net:70/misc/encabulator.jpeg
+Smallest text file contents:
+.
+Largest text file size: 36495 bytes
+Smallest binary file size: 253 bytes
+Largest binary file size: 45584 bytes
+Invalid references: 1
+  INVALID: 1Some menu - but on what host???	/misc/malformed1/file	
+External servers:
+  invalid:0 is down
+  gopher.floodgap.com:70 is up
+  comp3310.ddns.net:72 is down
+  comp3310.ddns.net:73 is down
+  comp3310.ddns.net:74 is down
+  comp3310.ddns.net:71 is up
