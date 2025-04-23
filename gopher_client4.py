@@ -82,7 +82,6 @@ class GopherClient:
             break
     except socket.timeout:
       error = f"Timed out while connecting in {timeout} seconds"
-    
     return bytes(buf), error
 
   def _req(s: Self, host: str, port: int, sel: str, text: bool) -> bytes:
@@ -95,8 +94,8 @@ class GopherClient:
         s._log(error if error else f"Request Completed  {sel}  {len(data)}  {time.time()-t0:.2f}s")
         return sel, data, error
     except FutureTimeout:
-        s._log(f"TIMEOUT The Server Most Likely Never Responded or Stopped Responding{sel}")
-        error = f"TIMEOUT The Server Most Likely Never Responded or Stopped Responding{sel}"
+        s._log(f"Timed out while receiving data")
+        error = f"Timed out while receiving data"
         return sel, b"", error
     except Exception as e:
         s._log(f"FAILED {sel} {e}")
@@ -134,19 +133,24 @@ class GopherClient:
 
     if sel == "":
       s._log("CRAWL DONE, TERMINATING")
+      s.pool.shutdown(wait=True)
       return
-
+    
+  
 if __name__ == "__main__":
   client = GopherClient("comp3310.ddns.net", 70)
   start = time.time()
   client.crawl()
-  client.pool.shutdown(wait=True)
   print(time.time() - start)
-  print(len(client.binary_files))
-  print(len(client.dirs))
-  print(len(client.text_files))
+  print('Num Binary', len(client.binary_files))
+  print('Num Dirs', len(client.dirs))
+  print('Num Text Files', len(client.text_files))
   print(len(client.exts))
 
   file: TextFile
   for file in client.text_files:
     print(file, client.text_files[file].error)
+
+  file: BinaryFile
+  for file in client.binary_files:
+    print(file, client.binary_files[file].error)
