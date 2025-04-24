@@ -42,10 +42,10 @@ def __str__(s: Self)->str: return .path
 ### Text Files
 
 * There are 15 text files that the indexer was able to find. Their paths alongside their sizes are as follows.
-* ![Image](Images/TextFiles.png)
+	* ![Image](Images/TextFiles.png)
 * The maximum data received from a text file was from `/misc/firehose` before the connection was interrupted as the server never stopped sending data for that file.
 * As you can see, the indexer was able to receive some data for all text files except `misc/godot`. 
-* ![TextFilesErrors](Images/TextFilesErrors.png)
+	* ![TextFilesErrors](Images/TextFilesErrors.png)
 
 * The indexer stores the text file data in [TextFile](Artifacts/TextFile.py) object.
 
@@ -77,7 +77,7 @@ def __str__(s: Self)->str: return s.path
 		* Size of Data Received(Bytes)
 			* 677368
 		* Sample of the Content:
-			*  ``b'For a number of years now, work has been proceeding in order to bring perfection to the crudel..`` 
+			*  ``b'For a number of years now, work has been proceeding in order to bring perfection to the crudel`` ...
 * Smallest File
 	* ``comp3310.ddns.net:70/misc/godot`` 
 	* No Data Received
@@ -87,3 +87,7 @@ def __str__(s: Self)->str: return s.path
 		* 3
 	*  Content
 		* ``Hello!\r\n.\r\n``
+
+* Some More Samples
+	* ![Contents of the TextFiles](Images/TextFilesContent.png)
+

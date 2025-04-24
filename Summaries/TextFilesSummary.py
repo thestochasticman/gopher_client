@@ -39,9 +39,10 @@ class TextFilesSummary:
     df = DataFrame.from_records(records, index=list(range(1, len(s.files) + 1)))
     df = df.rename(columns={'size': 'size(bytes)'})
     df['path'] = df['path'].apply(lambda x: x[:50])
+    print(Style.BRIGHT + Fore.GREEN + f"The errors of the {len(s.files)} text files and the status of the request are as follows")
     print(Fore.GREEN + df[['path', 'size(bytes)', 'error', 'success']].to_string(max_colwidth=100))
-    
-
+    print(Style.BRIGHT + Fore.GREEN + f"The content of the {len(s.files)} text files and the status of the request are as follows")
+    print(Fore.GREEN + df[['path', 'size(bytes)', 'content', 'success']].to_string(max_colwidth=100))
 
     # print(Fore.GREEN + df.to_string(max_colwidth=100))
     # print(Fore.GREEN + df[['path', 'content', 'size(bytes)']].to_string(max_colwidth=100))

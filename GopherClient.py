@@ -151,7 +151,7 @@ class GopherClient:
   def generate_summary(s: Self):
     dirs_summary = DirsSummary(s.dirs)
     dirs_summary.generate_summary()
-  
+    print('-' * 150)
     files_summary = TextFilesSummary(s.text_files)
     files_summary.generate_summary()
     print(len(s.text_files))
