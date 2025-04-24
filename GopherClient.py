@@ -16,6 +16,7 @@ from Artifacts.Ext import Ext
 from colorama import init, Fore, Back, Style
 from Artifacts.BadLine import BadLine
 from Summaries.BadLinesSummary import BadLinesSummary
+import os
 
 BUF_SIZE = 4096                     # bytes per recv
 GOPHER_TERM = b".\r\n"              # end‑of‑menu sequence
@@ -23,6 +24,9 @@ DEFAULT_TIMEOUT = 5                 # seconds per network op
 MAX_WORKERS = 10                    # thread‑pool size
 EXT_CONNECT_TIMEOUT = 2.0           # external host ping
 MAX_DOWNLOAD_SIZE = 1024 * 1024     # 1 MB max file size
+
+
+LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Logs')
 
 class GopherClient:
   def __init__(
@@ -114,8 +118,9 @@ class GopherClient:
 
     Futuretimeout is raised if a certain number of seconds have passed since the start of the thread.
 
-    FutureTimeout still extractt the data that was received by the worker thread in case it has to abruptly shut down the thread.
-    
+    FutureTimeout still extract the data that was received by the worker thread in case it has to abruptly shut down the thread.
+
+    Finally, FAILED will receive some new exception that was not explicitly defined.
     """
     path = f"{host}:{port}{sel}"
     s._log(f"CONNECT {path}")
@@ -136,7 +141,7 @@ class GopherClient:
         s._log(error)
         return path, b"", error
     except Exception as e:
-        s._log(f"FAILED, Received {e} for {path}")
+        s._log(f"FAILED, Some error that is not being explicitly handled by the code has occoured: The error is: {e} for {path}")
         error = f"worker {path}: {e}"
         return path, b"", error
 
@@ -185,8 +190,8 @@ class GopherClient:
       s._ping_ext(host, port)
       return  
     if    _type == "1" and (host, port) == (s.host, s.port): s.index(sel)
-    elif  _type == "0": s.text_files[path] = TextFile(*s._req(host, port, sel, True))
-    else              : s.binary_files[path] = BinaryFile(*s._req(host, port, sel, False))
+    elif  _type == "0": s.text_files[path] = TextFile(*s._req(host, port, sel, True), log_dir=LOG_DIR)
+    else              : s.binary_files[path] = BinaryFile(*s._req(host, port, sel, False), log_dir=LOG_DIR)
 
     # if (host, port) != (s.host, s.port):
     #   s._ping_ext(host, port)
@@ -208,7 +213,7 @@ class GopherClient:
       try: s.explore_line(line, dir)
       except Exception as e:
         error = 'Some error that is not being handled explicitly has occured. The error is {e}'
-        bad_line = BadLine(line, error)
+        bad_line = BadLine(line, dir, error)
         s.bad_lines[line] = bad_line
 
     if dir == "":
@@ -231,7 +236,6 @@ class GopherClient:
     print('-' * 150)
     bad_line_summary = BadLinesSummary(s.bad_lines)
     bad_line_summary.generate_summary()
-
     
   
 if __name__ == "__main__":
@@ -239,13 +243,3 @@ if __name__ == "__main__":
   start = time.time()
   client.index()
   client.generate_summary()
-
-  # file: TextFile
-  # for file in client.text_files:
-  #   print(file, client.text_files[file].error)
-
-  # file: BinaryFile
-  # for file in client.binary_files:
-  #   print(file, client.binary_files[file].error)
-    
-
