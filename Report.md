@@ -36,8 +36,6 @@ def __post_init__(s: Self):
 
 def __str__(s: Self)->str: return .path
 ```
-* The indexer stores the information of each directory in a [Dir](Artifacts/Dir.py) object. The object contains information about the raw data, error encountered(if any) while receiving data, the lines that are basically computed from the raw data received and whether all data was received successfully according to the indexer.
-
 
 
 ### Text Files
@@ -48,31 +46,45 @@ def __str__(s: Self)->str: return .path
 * As you can see, the indexer was able to receive some data for all text files except `misc/godot`. 
 	* ![TextFilesErrors](Images/TextFilesErrors.png)
 
-* The indexer stores the text file data in [TextFile](Artifacts/TextFile.py) object.
+* The Text file definition can be found in [Artifacts/TextFile.py](Artifacts/TextFile.py) object. 
 
 ```python
 from dataclasses import dataclass
 from typing_extensions import Self
 from dataclasses import field
+from json import dump
+from os.path import exists
+from os import makedirs
+from os.path import join
 
 @dataclass(frozen=True)
+
 class TextFile:
-	path : str
-	raw : bytes
-	error : str
-	content : str = field(init=False)
-	size : int = field(init=False)
-	success : bool = field(init=False)
+
+	path           : str
+	raw            : bytes
+	error          : str
+	log_dir        : str
+	content        : str = field(init=False)
+	size           : int = field(init=False)
+	success        : bool = field(init=False)
+	text_files_dir : str = field(init=False)
 
 def __post_init__(s: Self):
 	object.__setattr__(s, 'content', s.raw.decode("utf-8", "replace"))
 	object.__setattr__(s, 'success', True if not s.error else False)
 	object.__setattr__(s, 'size', len(s.raw))
+	object.__setattr__(s, 'text_files_dir', join(f"{s.log_dir}", "TextFiles"))
+
+	if not exists(s.text_files_dir): makedirs(s.text_files_dir, exist_ok=True)
+	destination = join(f"{s.text_files_dir}", f"{s.path.replace('/', '-')}.json")
+	dump(s.content, open(destination, 'w+'))
 
 def __str__(s: Self)->str: return s.path
 ```
 
-* The requests for which data connection was closed after reading the entire data was received followed by successful termination of the connection with the address of the file are successful. Requests where no data was received or the indexer had to interrupt the connection are not considered to be completed successfully. But the indexer stores whatever data was received before the receive is interrupted in the TextFile object.
+* If the server terminates connection after successfully sending data, a request is considered successful. The file must also contain ``'.\r\n'`` in the end for the indexer to know that it has ended. Otherwise it will wait until some timeout has occured. This was done to separate files that end with ``'.\r\n'`` from the files that don't.
+* Requests where no data was received, file did not end with ``'.\r\n'`` or the indexer had to interrupt the connection are not considered to be completed successfully. But the indexer stores whatever data was received before some exception is triggered in the TextFile Object.
 * There are different ways that these bad receives from the server are handled, they will be discussed in a later section.
 * Largest File
 	* ``comp3310.ddns.net:70/misc/firehose``  
@@ -94,9 +106,20 @@ def __str__(s: Self)->str: return s.path
 * Some More Samples of the content
 	* ![Contents of the TextFiles](Images/TextFilesContent.png)
 
+#### Handling Bad Receives
 
-### Binary Files
+* The indexer puts a cap on the amount of data the server can send. If you change the ``DEFAULT_TIMEOUT`` value from 5 to 20 seconds, and keep the ``MAX_DOWNLOAD_SIZE = 1024 * 1024``, you will observe that instead of a timeout error, the indexer will catch a different error related to the maximum download size. So the problem of the sever continuously sending data there is handled using multiple checks.
+
+* For files that do not end with '``.\r\n'`` the indexer collects data but does not exit the receiving loop because the end of file character has not reached. It does leave even if server stops sending information. It only receives after a socket timeout, total receive time timeout, or a thread timeout. This helps distinguish files that follow proper syntax from those that don't.
+* Please check the [GopherClient._worker](GopherClient.py) for more clarity.
+
+#### Content
+Please check [Logs/TextFiles](Logs/TextFiles) for content of the text files.
+
+### Binary Files(2)
 * 2 Binary Files were found and the data for them was received successfully.
+* Similar to text files, information pertaining to Binary files is stored in the BinaryFiles class in [Artifacts/BinaryFile.py](Artifacts/BinaryFile.py) 
+
 	*  ![BinaryFiles](Images/BinaryFiles.png)
 * Smallest File
 	* ``comp3310.ddns.net:70/misc/binary``
@@ -105,12 +128,15 @@ def __str__(s: Self)->str: return s.path
 	* ``comp3310.ddns.net:70/misc/encabulator.jpeg``
 	* bytes received: 45584
 
-### External Servers
+* For Binary files, the \_worker checks whether the server has stopped sending data in order to to break out of the receiving loop.
+#### Content
+The content of the Binary files can be found in Logs/BinaryFiles
+### External Servers(6)
 
 * The following external servers were found(True means they are up, False means they are down).
 	* ![Exts](Images/Exts.png)
 
-### Bad Directory Lines
+### Bad Directory Lines(41)
 
 * Another problem that we encounter is bad directory lines. The client gives the following message after coming across a directory line with improper description.
 	 * ```FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {dir}```
@@ -120,4 +146,12 @@ def __str__(s: Self)->str: return s.path
 	* ![BadLines](Images/BadLines.png)
 
 
+
+
+## Some more points
+
+* I have used immutable classes in order to avoid conflicts due to multithreading, although it was probably unnecessary.
+* All the errors that my client was able to come across are explicitly handled.
+* In case the tutor decides to test this on some other gopher, I have added a general exception to the try catch blocks. Hopefully, it works.
+* Tried a different approach with my coding style.
 

@@ -20,7 +20,7 @@ import os
 
 BUF_SIZE = 4096                     # bytes per recv
 GOPHER_TERM = b".\r\n"              # end‑of‑menu sequence
-DEFAULT_TIMEOUT = 5                 # seconds per network op
+DEFAULT_TIMEOUT = 20                 # seconds per network op
 MAX_WORKERS = 10                    # thread‑pool size
 EXT_CONNECT_TIMEOUT = 2.0           # external host ping
 MAX_DOWNLOAD_SIZE = 1024 * 1024     # 1 MB max file size

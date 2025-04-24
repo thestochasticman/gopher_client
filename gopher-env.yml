@@ -1,0 +1,11 @@
+name: gopher-client
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.12.9
+  - colorama
+  - pandas
+  - pip
+  - pip:
+      - typing_extensions
