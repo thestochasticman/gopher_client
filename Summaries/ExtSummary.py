@@ -18,6 +18,7 @@ class ExtsSummary:
     for path in s.exts:
       records += [asdict(s.exts[path])]
     
+    print(Style.BRIGHT + Fore.GREEN + f"The extenal servers are as follows")
     df = DataFrame.from_records(records, index=range(1, len(records) + 1))
     print(Fore.GREEN + df.to_string())
 

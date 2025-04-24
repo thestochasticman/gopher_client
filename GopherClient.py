@@ -13,6 +13,7 @@ from Artifacts.Dir import Dir
 from Artifacts.TextFile import TextFile
 from Artifacts.BinaryFile import BinaryFile
 from Artifacts.Ext import Ext
+from colorama import init, Fore, Back, Style
 
 BUF_SIZE = 4096                     # bytes per recv
 GOPHER_TERM = b".\r\n"              # end‑of‑menu sequence
@@ -170,6 +171,8 @@ class GopherClient:
     ext_summary = ExtsSummary(s.exts)
     ext_summary.generate_summary()
     print('-' * 150)
+
+    print(Style.BRIGHT + Fore.GREEN + f"Other bad search")
     print(client.bad_lines)
     
   
