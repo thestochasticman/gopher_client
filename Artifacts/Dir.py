@@ -4,7 +4,7 @@ from dataclasses import field
 
 @dataclass(frozen=True)
 class Dir:
-  path     : str     
+  path    : str     
   raw     : bytes
   error   : str       = ''
   lines   : list[str] = field(init=False)
@@ -23,4 +23,4 @@ class Dir:
       object.__setattr__(s, 'success', False)
 
 
-  def __str__(s: Self)->str: s.path
+  def __str__(s: Self)->str: return s.path

@@ -1,0 +1,182 @@
+{
+  "main": {
+    "id": "4e69ddbccfdcddc8",
+    "type": "split",
+    "children": [
+      {
+        "id": "c7d8435e21e61d6f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "61e0b78df22d8126",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Assignment.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Assignment"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "33f25e2598e0a9f0",
+    "type": "split",
+    "children": [
+      {
+        "id": "b10ca9ec706f77ac",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b46b8b18a97d3df4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3d900e20c2122738",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "4f5f786cf5c4d080",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "eb2c414fdc76bf22",
+    "type": "split",
+    "children": [
+      {
+        "id": "40eb712b004afac4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f39f590d2a2f975d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Assignment.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Assignment"
+            }
+          },
+          {
+            "id": "5f98b532637a276a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Assignment.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Assignment"
+            }
+          },
+          {
+            "id": "853fa1cda9b82d6a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "8f42017e3e9a6e51",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Assignment.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Assignment"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "b46b8b18a97d3df4",
+  "lastOpenFiles": [
+    "Images/TextFilesErrors.png",
+    "Assignment.md",
+    "Images/TextFilesErrors.png",
+    "Images/TextFilesErrors.png.png",
+    "Artifacts/Dir~.py",
+    "Artifacts.md",
+    "Images/TextFiles.png",
+    "Images/Directories.png"
+  ]
+}

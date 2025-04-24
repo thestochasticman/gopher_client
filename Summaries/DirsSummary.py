@@ -9,6 +9,7 @@ class DirsSummary:
 
   def generate_summary(s: Self):
     init(autoreset=True)
-    print(Style.BRIGHT + Fore.RED + f"The full paths of the {len(s.dirs)} directories are as follows")
+    print(Style.BRIGHT + Fore.GREEN + f"The full paths of the {len(s.dirs)} directories are as follows")
     for i, (sel, dir) in enumerate(s.dirs.items()):
-      print(Fore.RED + str(i+1) + ': ' + (dir.path or '/(Root)'))
+      print(Fore.GREEN + str(i+1).zfill(2) + ': ' + (dir.path or '/(Root)'))
+
