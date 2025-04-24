@@ -49,7 +49,6 @@ def __str__(s: Self)->str: return .path
 
 * The indexer stores the text file data in [TextFile](Artifacts/TextFile.py) object.
 
-* 
 ```python
 from dataclasses import dataclass
 from typing_extensions import Self
@@ -72,15 +71,19 @@ def __post_init__(s: Self):
 def __str__(s: Self)->str: return s.path
 ```
 
-* The file requests for which data connection was closed after reading the entire data are considered to be successful. Requests where no data was received or the indexer had to interrupt the connection are not considered to be completed successfully.
+* The file requests for which data connection was closed after reading the entire data are considered to be successful. Requests where no data was received or the indexer had to interrupt the connection are not considered to be completed successfully. But the indexer stores whatever data was received before the receive is interrupted in the TextFile object.
 * Largest File
-	* comp3310.ddns.net:70/misc/firehose 
-		* Size of Data Received(Bytes): 677368
+	* ``comp3310.ddns.net:70/misc/firehose``  
+		* Size of Data Received(Bytes)
+			* 677368
 		* Sample of the Content:
 			*  ``b'For a number of years now, work has been proceeding in order to bring perfection to the crudel..`` 
 * Smallest File
-	* comp3310.ddns.net:70/misc/godot
+	* ``comp3310.ddns.net:70/misc/godot`` 
+	* No Data Received
 * Smallest File with data
-	* Size of Data Received(Bytes): 3
+	* ``comp3310.ddns.net:70/misc/empty.txt`` 
+	* Size of Data Received(Bytes)
+		* 3
 	*  Content
 		* ``Hello!\r\n.\r\n``

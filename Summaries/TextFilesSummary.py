@@ -35,12 +35,14 @@ class TextFilesSummary:
         colour = Fore.RED
       print(colour + str(i+1).zfill(2) + ': ' + file.path + ': ' + str(file.size) + ': ' )
       records += [asdict(file)]
-      # if sel.__contains__('firehose')
-    set_option("display.max_colwidth", 60)     
+   
     df = DataFrame.from_records(records, index=list(range(1, len(s.files) + 1)))
     df = df.rename(columns={'size': 'size(bytes)'})
-    fmt = {"error": lambda x: x}                # identity formatter
+    df['path'] = df['path'].apply(lambda x: x[:50])
     print(Fore.GREEN + df[['path', 'size(bytes)', 'error', 'success']].to_string(max_colwidth=100))
+    
+
+
     # print(Fore.GREEN + df.to_string(max_colwidth=100))
     # print(Fore.GREEN + df[['path', 'content', 'size(bytes)']].to_string(max_colwidth=100))
 
