@@ -28,6 +28,4 @@ class TextFile:
     destination = join(f"{s.text_files_dir}", f"{s.path.replace('/', '-')}.json")
     dump(s.content, open(destination, 'w+'))
 
-
-
   def __str__(s: Self)->str: return s.path

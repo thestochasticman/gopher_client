@@ -1,14 +1,14 @@
 ## Assignment 2: Gopher Index
 ### Installation
 
-Install Miniconda
-Run 
-	``conda env create -f gopher-env.yaml``
-	`conda activate gopher-client`
+* Install Miniconda
+* Run 
+	* ``conda env create -f gopher-env.yaml``
+	* `conda activate gopher-client`
 ### Running the Indexer(Client)
-Run
-	``python GopherClient.py``
-### TCP Handshake
+* Run
+	* ``python GopherClient.py``
+### Initial Server Connection
 
 *  Wireshark (just) this initial-response conversation in both directions, from the starting TCP connection (SYN) to its closing, and include a screenshot of that Wireshark summary in your report (don’t expand to the lowest level, one row per packet/message is plenty).
 * ![Handshake](Images/TCPHandshake.png)
@@ -148,9 +148,9 @@ The content of the Binary files can be found in Logs/BinaryFiles
 
 * Another problem that we encounter is bad directory lines. The client gives the following message after coming across a directory line with improper description.
 	 * ```FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {dir}```
-	 * The 
 	 * Where line is some line from a directory(dir).
-* There are 42 such cases
+	
+* There are 42 such cases. This happens because the line does not correspond to a valid address on the server.
 	* ![BadLines](Images/BadLines.png)
 
 
@@ -162,4 +162,5 @@ The content of the Binary files can be found in Logs/BinaryFiles
 * All the errors that my client was able to come across are explicitly handled.
 * In case the tutor decides to test this on some other gopher, I have added a general exception to the try catch blocks. Hopefully, it works.
 * Tried a different approach with my coding style.
+* I use a mac, hopefully it works on a windows since I am using miniconda.
 

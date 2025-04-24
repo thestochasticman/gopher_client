@@ -17,7 +17,4 @@ class Dir:
     object.__setattr__(s, 'lines', s.raw.decode("utf-8", "replace").splitlines())
     object.__setattr__(s, 'success', False if s.error else True)
 
-
-
-
   def __str__(s: Self)->str: return s.path

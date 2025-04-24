@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5004348754883
+    "width": 294.5004348754883,
+    "collapsed": true
   },
   "right": {
     "id": "eb2c414fdc76bf22",
@@ -170,6 +171,10 @@
   },
   "active": "61e0b78df22d8126",
   "lastOpenFiles": [
+    "Report.pdf",
+    "README.md",
+    "Report.md",
+    "Readme.md",
     "condaenv.a79yjpcq.requirements.txt",
     "gopher-env.yml",
     "gopher-env.yaml",
@@ -180,10 +185,8 @@
     "Logs/BinaryFiles/comp3310.ddns.net:70-misc-encabulator.jpeg.json",
     "Logs/BinaryFiles/comp3310.ddns.net:70-misc-binary.json",
     "Logs/TextFiles/comp3310.ddns.net:70-misc-nestz.json",
-    "Logs/TextFiles/comp3310.ddns.net:70-misc-empty.txt.json",
     "Images/RequestAndResponseAndTimestamp.png",
     "Images/TCPHandshake.png",
-    "Report.md",
     "Images/BadLines.png",
     "Images/Screenshot 2025-04-24 at 8.36.50 PM.png",
     "Images/Exts.png",
