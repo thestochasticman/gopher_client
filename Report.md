@@ -102,12 +102,14 @@ def __str__(s: Self)->str: return s.path
 
 ![Exts](Images/Exts.png)
 
-* One other error that we encounter is as follows
+### Bad Directory Lines
+
+* Another problem that we encounter is bad directory lines. The client gives the following message after coming across a directory line with improper description.
 	 * ```FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {dir}```
+	 * The 
 	 * Where line is some line from a directory(dir).
 * There are 42 such cases
 * ![BadLines](Images/BadLines.png)
 
 
 
-![script](Artifacts/Dir.py)
