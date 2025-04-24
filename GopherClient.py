@@ -61,6 +61,14 @@ class GopherClient:
     timeout: float
   )->Tuple[bytes, bool, bool, bool]:
     
+    """
+      Ensures that the thread does not wait too long for connection, will move on if server does not connect in a certain time.
+      Ensures that the thread does not wait too long to receive data, will move on if server does not send data for a certain time.
+      Puts a cap on the amount of data that the server can send.
+      Puts a cap on the amount of time the connection with the server can be active.
+      Checks for end line character for text lines for termination.
+    """
+    
     buf = bytearray()
     total_read = 0
     start_time = time.time()
@@ -99,6 +107,16 @@ class GopherClient:
     return bytes(buf), error
 
   def _req(s: Self, host: str, port: int, sel: str, text: bool) -> bytes:
+
+    """
+    This function starts another thread that requests the server for data.
+    This is done for safe multithreading
+
+    Futuretimeout is raised if a certain number of seconds have passed since the start of the thread.
+
+    FutureTimeout still extractt the data that was received by the worker thread in case it has to abruptly shut down the thread.
+    
+    """
     path = f"{host}:{port}{sel}"
     s._log(f"CONNECT {path}")
     
@@ -123,6 +141,11 @@ class GopherClient:
         return path, b"", error
 
   def _ping_ext(s: Self, h: str, p: int) -> None:
+
+    """
+    Check if the external server responds or not
+    """
+
     if (h, p) in s.exts: return
     try:
       with socket.create_connection((h, p), timeout=EXT_CONNECT_TIMEOUT):
@@ -130,15 +153,30 @@ class GopherClient:
     except Exception:
       s.exts[(h, p)] = Ext(h, p, False)
 
-  def explore_line(s: Self, line: str, sel: str)->tuple[str, str, str, str, int]:
+  def explore_line(s: Self, line: str, dir: str)->tuple[str, str, str, str, int]:
+
+    """
+    line stands for a selection of some artifact on the server.
+    dir stands for directory that contains the line.
+
+    This artifact can be a Binary file, Text file, an External Server or another Directory.
+
+    extract desc(description), sel, host and port corresponding to the line
+
+    If sel refers to a file, this function will ask the server for data for the file.
+    If sel refers to an external server, the function will ping the external server.
+    If sel refers to another directory, the function will call the index function so each line in the directory may be explored.
+
+    log lines with incorrect format
+    """
     _type, rest = line[0], line[1:]
     try:
       desc, sel, host, port = rest.split("\t")[:4]
     except:
-      error = f"FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {sel}"
+      error = f"FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {dir}"
       s._log(error)
-      bad_line = BadLine(line, sel, error)
-      s.bad_lines[(sel, line)] = bad_line
+      bad_line = BadLine(line, dir, error)
+      s.bad_lines[(dir, line)] = bad_line
       return
     port= int(port)
     path = f"{host}:{port}{sel}"
@@ -153,20 +191,27 @@ class GopherClient:
     # if (host, port) != (s.host, s.port):
     #   s._ping_ext(host, port)
 
-  def index(s: Self, sel: str = ""):
-    if sel in s.visited: return
-    s.visited.add(sel)
-    s.dirs[sel or "/"] = Dir(*s._req(s.host, s.port, sel, text=True))
-    for line in s.dirs[sel or "/"].lines:
+  def index(s: Self, dir: str = ""):
+    """
+      dir is the address for a directory on the server.
+      
+      This will ask the server for information regarding every line in the directory.
+
+      avoids revisiting directories.
+    """
+    if dir in s.visited: return
+    s.visited.add(dir)
+    s.dirs[dir or "/"] = Dir(*s._req(s.host, s.port, dir, text=True))
+    for line in s.dirs[dir or "/"].lines:
 
       if not line: continue
-      try: s.explore_line(line, sel)
+      try: s.explore_line(line, dir)
       except Exception as e:
         error = 'Some error that is not being handled explicitly has occured. The error is {e}'
         bad_line = BadLine(line, error)
         s.bad_lines[line] = bad_line
 
-    if sel == "":
+    if dir == "":
       s._log("index DONE, TERMINATING")
       s.pool.shutdown(wait=True)
       return
@@ -203,3 +248,4 @@ if __name__ == "__main__":
   # for file in client.binary_files:
   #   print(file, client.binary_files[file].error)
     
+

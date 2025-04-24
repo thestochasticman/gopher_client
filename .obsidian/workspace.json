@@ -168,10 +168,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "61e0b78df22d8126",
+  "active": "b46b8b18a97d3df4",
   "lastOpenFiles": [
-    "Images/BadLines.png",
+    "Images/RequestAndResponseAndTimestamp.png",
+    "Images/TCPHandshake.png",
     "Report.md",
+    "Images/BadLines.png",
     "Images/Screenshot 2025-04-24 at 8.36.50 PM.png",
     "Summaries/__pycache__/BadLinesSummary.cpython-312.pyc",
     "Summaries/BadLinesSummary.py",

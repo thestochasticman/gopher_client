@@ -1,5 +1,12 @@
 ## Assignment 2: Gopher Index
 
+### TCP Handshake
+
+*  Wireshark (just) this initial-response conversation in both directions, from the starting TCP connection (SYN) to its closing, and include a screenshot of that Wireshark summary in your report (don’t expand to the lowest level, one row per packet/message is plenty).
+* ![Handshake](Images/TCPHandshake.png)
+### Indexer prints requests and responses with timestamps
+* ![Request and Response with Timestamp](Images/RequestAndResponseAndTimestamp.png)
+
 ### Directories
 
   * There are 41 Directories that the indexer was able to find.
@@ -30,6 +37,8 @@ def __post_init__(s: Self):
 def __str__(s: Self)->str: return .path
 ```
 * The indexer stores the information of each directory in a [Dir](Artifacts/Dir.py) object. The object contains information about the raw data, error encountered(if any) while receiving data, the lines that are basically computed from the raw data received and whether all data was received successfully according to the indexer.
+
+
 
 ### Text Files
 
@@ -80,7 +89,7 @@ def __str__(s: Self)->str: return s.path
 		* 3
 	*  Content
 		* ``.\r\n``
-		* This is basically the end term for text data transfer gophers.
+		* This is basically the end term for text data transfer in gophers.
 
 * Some More Samples of the content
 	* ![Contents of the TextFiles](Images/TextFilesContent.png)
@@ -88,7 +97,7 @@ def __str__(s: Self)->str: return s.path
 
 ### Binary Files
 * 2 Binary Files were found and the data for them was received successfully.
-* ![BinaryFiles](Images/BinaryFiles.png)
+	*  ![BinaryFiles](Images/BinaryFiles.png)
 * Smallest File
 	* ``comp3310.ddns.net:70/misc/binary``
 	* bytes received: 253
@@ -99,8 +108,7 @@ def __str__(s: Self)->str: return s.path
 ### External Servers
 
 * The following external servers were found(True means they are up, False means they are down).
-
-![Exts](Images/Exts.png)
+	* ![Exts](Images/Exts.png)
 
 ### Bad Directory Lines
 
@@ -109,7 +117,7 @@ def __str__(s: Self)->str: return s.path
 	 * The 
 	 * Where line is some line from a directory(dir).
 * There are 42 such cases
-* ![BadLines](Images/BadLines.png)
+	* ![BadLines](Images/BadLines.png)
 
 
 
