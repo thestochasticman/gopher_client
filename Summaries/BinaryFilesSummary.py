@@ -1,7 +1,7 @@
 from typing_extensions import Self
 from dataclasses import dataclass
 from dataclasses import field
-from Artifacts.TextFile import TextFile
+from Artifacts.BinaryFile import BinaryFile
 from colorama import init, Fore, Back, Style
 from collections import OrderedDict
 from dataclasses import asdict
@@ -9,25 +9,25 @@ from pandas import DataFrame
 from pandas import set_option
 
 @dataclass(frozen=True)
-class TextFilesSummary:
-  files         : dict[str, TextFile]
+class BinaryFilesSummary:
+  files         : dict[str, BinaryFile]
   files_by_size : OrderedDict = field(init=False)
   df            : DataFrame   = field(init=False)
 
   def __post_init__(s: Self):
     sorted_items = sorted(
       s.files.items(),
-      key=lambda kv: kv[1].size,            # kv = (path, TextFile)
+      key=lambda kv: kv[1].size,            # kv = (path, BinaryFile)
       reverse=True
     )
     object.__setattr__(s, "files_by_size", OrderedDict(sorted_items))
 
   def generate_summary(s: Self):
     init(autoreset=True)
-    print(Style.BRIGHT + Fore.GREEN + f"The full paths of the {len(s.files)} files and the size of the data received from them is as follows")
+    print(Style.BRIGHT + Fore.GREEN + f"The full paths of the {len(s.files)} binary files and the size of the data received from them is as follows")
     # for i, (sel, file) in enumerate(s.files.items()):
     records = []
-    file: TextFile
+    file: BinaryFile
     for i, (sel, file) in enumerate(s.files_by_size.items()):
       if file.success:
         colour = Fore.GREEN
@@ -39,10 +39,8 @@ class TextFilesSummary:
     df = DataFrame.from_records(records, index=list(range(1, len(s.files) + 1)))
     df = df.rename(columns={'size': 'size(bytes)'})
     df['path'] = df['path'].apply(lambda x: x[:50])
-    print(Style.BRIGHT + Fore.GREEN + f"The errors of the {len(s.files)} text files and the status of the request are as follows")
+    print(Style.BRIGHT + Fore.GREEN + f"The errors of the {len(s.files)} binary files and the status of the request are as follows")
     print(Fore.GREEN + df[['path', 'size(bytes)', 'error', 'success']].to_string(max_colwidth=100))
-    print(Style.BRIGHT + Fore.GREEN + f"The content of the {len(s.files)} text files and the status of the request are as follows")
-    print(Fore.GREEN + df[['path', 'size(bytes)', 'content', 'success']].to_string(max_colwidth=100))
 
     # print(Fore.GREEN + df.to_string(max_colwidth=100))
     # print(Fore.GREEN + df[['path', 'content', 'size(bytes)']].to_string(max_colwidth=100))

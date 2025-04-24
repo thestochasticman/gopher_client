@@ -7,17 +7,19 @@ from typing import Set, Tuple
 from typing_extensions import Self
 from Summaries.DirsSummary import DirsSummary
 from Summaries.TextFilesSummary import TextFilesSummary
+from Summaries.BinaryFilesSummary import BinaryFilesSummary
+from Summaries.ExtSummary import ExtsSummary
 from Artifacts.Dir import Dir
 from Artifacts.TextFile import TextFile
 from Artifacts.BinaryFile import BinaryFile
 from Artifacts.Ext import Ext
 
 BUF_SIZE = 4096                     # bytes per recv
-GOPHER_TERM = b"\r\n.\r\n"          # end‑of‑menu sequence
-DEFAULT_TIMEOUT = 5               # seconds per network op
+GOPHER_TERM = b".\r\n"              # end‑of‑menu sequence
+DEFAULT_TIMEOUT = 5                 # seconds per network op
 MAX_WORKERS = 10                    # thread‑pool size
-EXT_CONNECT_TIMEOUT = 0.5           # external host ping
-MAX_DOWNLOAD_SIZE = 1024 * 1024  # 1 MB max file size
+EXT_CONNECT_TIMEOUT = 2.0           # external host ping
+MAX_DOWNLOAD_SIZE = 1024 * 1024     # 1 MB max file size
 
 class GopherClient:
   def __init__(
@@ -60,6 +62,7 @@ class GopherClient:
     total_read = 0
     start_time = time.time()
     error = ""
+    path = f"{host}:{port}{sel}"
     try:
       with socket.create_connection((host, port), timeout=timeout) as sock:
         sock.sendall(f"{sel}\r\n".encode())
@@ -72,13 +75,15 @@ class GopherClient:
           elif total_read >= (MAX_DOWNLOAD_SIZE - BUF_SIZE):
             error = f"INTERRUPTED, Download Limit of {MAX_DOWNLOAD_SIZE} KB exceeded: {path}"
             break
-          elif want_text and GOPHER_TERM in buf:
+          elif want_text and buf.endswith(GOPHER_TERM):
             break
           try:
             chunk = sock.recv(BUF_SIZE)
             if chunk:
               buf.extend(chunk)
               total_read += len(chunk)
+            if not chunk:
+              return bytes(buf), error
           except socket.timeout:
             error = f"INTERRUPTED, Timed out while waiting to receive data from socket: {path}"
             if sel == 'firehose':
@@ -127,12 +132,16 @@ class GopherClient:
     desc, sel, host, port = rest.split("\t")[:4]
     port= int(port)
     path = f"{host}:{port}{sel}"
+
+    if (host, port) != (s.host, s.port):
+      s._ping_ext(host, port)
+      return  
     if    _type == "1" and (host, port) == (s.host, s.port): s.index(sel)
     elif  _type == "0": s.text_files[path] = TextFile(*s._req(host, port, sel, True))
     else              : s.binary_files[path] = BinaryFile(*s._req(host, port, sel, False))
 
-    if (host, port) != (s.host, s.port):
-      s._ping_ext(host, port)
+    # if (host, port) != (s.host, s.port):
+    #   s._ping_ext(host, port)
 
   def index(s: Self, sel: str = ""):
     if sel in s.visited: return
@@ -152,9 +161,17 @@ class GopherClient:
     dirs_summary = DirsSummary(s.dirs)
     dirs_summary.generate_summary()
     print('-' * 150)
-    files_summary = TextFilesSummary(s.text_files)
-    files_summary.generate_summary()
-    print(len(s.text_files))
+    text_files_summary = TextFilesSummary(s.text_files)
+    text_files_summary.generate_summary()
+    print('-' * 150)
+    binary_files_summary = BinaryFilesSummary(s.binary_files)
+    binary_files_summary.generate_summary()
+    print('-' * 150)
+    ext_summary = ExtsSummary(s.exts)
+    ext_summary.generate_summary()
+    print('-' * 150)
+    print(client.bad_lines)
+    
   
 if __name__ == "__main__":
   client = GopherClient("comp3310.ddns.net", 70)
