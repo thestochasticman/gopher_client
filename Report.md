@@ -100,5 +100,5 @@ def __str__(s: Self)->str: return s.path
 
 * The following external servers were found(True means they are up, False means they are down).
 
-![[Images/Exts.png]]
+![Exts](Images/Exts.png)
 

@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 351.5004348754883
+    "width": 294.5004348754883
   },
   "right": {
     "id": "eb2c414fdc76bf22",
@@ -168,7 +168,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b46b8b18a97d3df4",
+  "active": "61e0b78df22d8126",
   "lastOpenFiles": [
     "Images/Exts.png",
     "Images/Exts.png",
