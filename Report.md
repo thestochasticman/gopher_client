@@ -1,5 +1,13 @@
 ## Assignment 2: Gopher Index
+### Installation
 
+Install Miniconda
+Run 
+	``conda env create -f gopher-env.yaml``
+	`conda activate gopher-client`
+### Running the Indexer(Client)
+Run
+	``python GopherClient.py``
 ### TCP Handshake
 
 *  Wireshark (just) this initial-response conversation in both directions, from the starting TCP connection (SYN) to its closing, and include a screenshot of that Wireshark summary in your report (don’t expand to the lowest level, one row per packet/message is plenty).
