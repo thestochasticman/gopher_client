@@ -102,3 +102,12 @@ def __str__(s: Self)->str: return s.path
 
 ![Exts](Images/Exts.png)
 
+* One other error that we encounter is as follows
+	 * ```FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {dir}```
+	 * Where line is some line from a directory(dir).
+* There are 42 such cases
+* ![BadLines](Images/BadLines.png)
+
+
+
+![script](Artifacts/Dir.py)

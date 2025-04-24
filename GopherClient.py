@@ -14,6 +14,8 @@ from Artifacts.TextFile import TextFile
 from Artifacts.BinaryFile import BinaryFile
 from Artifacts.Ext import Ext
 from colorama import init, Fore, Back, Style
+from Artifacts.BadLine import BadLine
+from Summaries.BadLinesSummary import BadLinesSummary
 
 BUF_SIZE = 4096                     # bytes per recv
 GOPHER_TERM = b".\r\n"              # end‑of‑menu sequence
@@ -41,7 +43,7 @@ class GopherClient:
     s.pool = ThreadPoolExecutor(max_workers=workers, thread_name_prefix="client")
     s.pool._thread_factory = _factory
     s.visited       : Set[str] = set()
-    s.bad_lines     : Set[str] = set()
+    s.bad_lines     : dict[str, BadLine] = dict()
     s.dirs          : dict[str, Dir] = dict()
     s.text_files    : dict[str, TextFile] = dict()
     s.binary_files  : dict[str, BinaryFile] = dict()
@@ -128,9 +130,16 @@ class GopherClient:
     except Exception:
       s.exts[(h, p)] = Ext(h, p, False)
 
-  def explore_line(s: Self, line: str)->tuple[str, str, str, str, int]:
+  def explore_line(s: Self, line: str, sel: str)->tuple[str, str, str, str, int]:
     _type, rest = line[0], line[1:]
-    desc, sel, host, port = rest.split("\t")[:4]
+    try:
+      desc, sel, host, port = rest.split("\t")[:4]
+    except:
+      error = f"FAILED, Invalid Gopher menu line format. Expected format: <type><desc><selector><host><port>. Got: ({line}) from {sel}"
+      s._log(error)
+      bad_line = BadLine(line, sel, error)
+      s.bad_lines[(sel, line)] = bad_line
+      return
     port= int(port)
     path = f"{host}:{port}{sel}"
 
@@ -149,9 +158,13 @@ class GopherClient:
     s.visited.add(sel)
     s.dirs[sel or "/"] = Dir(*s._req(s.host, s.port, sel, text=True))
     for line in s.dirs[sel or "/"].lines:
+
       if not line: continue
-      try: s.explore_line(line)
-      except Exception: s.bad_lines.add(line)
+      try: s.explore_line(line, sel)
+      except Exception as e:
+        error = 'Some error that is not being handled explicitly has occured. The error is {e}'
+        bad_line = BadLine(line, error)
+        s.bad_lines[line] = bad_line
 
     if sel == "":
       s._log("index DONE, TERMINATING")
@@ -171,9 +184,9 @@ class GopherClient:
     ext_summary = ExtsSummary(s.exts)
     ext_summary.generate_summary()
     print('-' * 150)
+    bad_line_summary = BadLinesSummary(s.bad_lines)
+    bad_line_summary.generate_summary()
 
-    print(Style.BRIGHT + Fore.GREEN + f"Other bad search")
-    print(client.bad_lines)
     
   
 if __name__ == "__main__":
