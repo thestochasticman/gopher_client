@@ -1,18 +1,16 @@
 import socket
 import time
 import threading
-from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 from datetime import datetime
 from typing import Set, Tuple
 from typing_extensions import Self
-from DirsSummary import DirsSummary
-from TextFilesSummary import TextFilesSummary
-from Dir import Dir
-from TextFile import TextFile
-from BinaryFile import BinaryFile
-from Ext import Ext
-
+from Summaries.DirsSummary import DirsSummary
+from Summaries.TextFilesSummary import TextFilesSummary
+from Artifacts.Dir import Dir
+from Artifacts.TextFile import TextFile
+from Artifacts.BinaryFile import BinaryFile
+from Artifacts.Ext import Ext
 
 BUF_SIZE = 4096                     # bytes per recv
 GOPHER_TERM = b"\r\n.\r\n"          # end‑of‑menu sequence
@@ -66,12 +64,13 @@ class GopherClient:
       with socket.create_connection((host, port), timeout=timeout) as sock:
         sock.sendall(f"{sel}\r\n".encode())
         sock.settimeout(timeout)
+        path = f"{host}:{port}{sel}"
         while True:
           if (time.time() - start_time) > timeout:
-            error = f"Max Time Limit of {timeout} seconds reached for connection"
+            error = f"INTERRUPTED, Max Time Limit of {timeout} seconds reached for connection: {path}"
             break
           elif total_read >= (MAX_DOWNLOAD_SIZE - BUF_SIZE):
-            error = f"Download Limit of {MAX_DOWNLOAD_SIZE} KB exceeded"
+            error = f"INTERRUPTED, Download Limit of {MAX_DOWNLOAD_SIZE} KB exceeded: {path}"
             break
           elif want_text and GOPHER_TERM in buf:
             break
@@ -81,38 +80,39 @@ class GopherClient:
               buf.extend(chunk)
               total_read += len(chunk)
           except socket.timeout:
-            error = "Timed out while waiting to receive data"
+            error = f"INTERRUPTED, Timed out while waiting to receive data from socket: {path}"
             if sel == 'firehose':
               print('this is firehose', buf)
           except Exception as e:
-            error = "Some other Exception"
+            error = f"INTERRUPTED, Some other Exception: {sel}"
             break
     except socket.timeout:
-      error = f"Timed out while connecting in {timeout} seconds"
+      error = f"FAILED, Timed out while connecting in {timeout} seconds: {path}"
     return bytes(buf), error
 
   def _req(s: Self, host: str, port: int, sel: str, text: bool) -> bytes:
-    s._log(f"CONNECT {host}:{port}{sel} (text={text})")
+    path = f"{host}:{port}{sel}"
+    s._log(f"CONNECT {path}")
+    
     t0 = time.time()
     fut = s.pool.submit(s._worker, host, port, sel, text, s.timeout)
     error = ''
     try:
         data, error = fut.result(timeout=s.timeout * 2)
-        s._log(error if error else f"Request Completed  {sel}  {len(data)}  {time.time()-t0:.2f}s")
-        return sel, data, error
+        s._log(error if error else f"Request Completed  {path}  {len(data)}  {time.time()-t0:.2f}s")
+        return path, data, error
     except FutureTimeout:
         if fut.done():
           data, error = fut.result()
-          error = error or f"Finished after caller timeout ({s.timeout}s)"
+          error = error or f"INTERRUPTED, Finished after worker thread timeout ({s.timeout * 2}s): {path}"
         else:
-          data, error = b"", f"FutureTimeout after {s.timeout}s"
-        s._log(f"Timed out while receiving data")
-        error = f"Timed out while receiving data"
-        return sel, b"", error
+          path, error = b"", f"INTERRUPTED, FutureTimeout after {s.timeout}s :{path}"
+        s._log(error)
+        return path, b"", error
     except Exception as e:
-        s._log(f"FAILED {sel} {e}")
-        error = f"worker {sel}: {e}"
-        return sel, b"", error
+        s._log(f"FAILED, Received {e} for {path}")
+        error = f"worker {path}: {e}"
+        return path, b"", error
 
   def _ping_ext(s: Self, h: str, p: int) -> None:
     if (h, p) in s.exts: return
@@ -154,9 +154,7 @@ class GopherClient:
   
     files_summary = TextFilesSummary(s.text_files)
     files_summary.generate_summary()
-
-
-    
+    print(len(s.text_files))
   
 if __name__ == "__main__":
   client = GopherClient("comp3310.ddns.net", 70)

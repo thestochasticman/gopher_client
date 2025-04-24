@@ -5,7 +5,7 @@ from types import NoneType
 
 @dataclass(frozen=True)
 class BinaryFile:
-  sel     : str
+  path    : str
   raw     : bytes
   error   : str
   size    : int = field(init=False)

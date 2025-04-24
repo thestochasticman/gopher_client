@@ -4,7 +4,7 @@ from dataclasses import field
 
 @dataclass(frozen=True)
 class TextFile:
-  sel       : str     
+  path      : str     
   raw       : bytes
   error     : str
   content   : str = field(init=False)
