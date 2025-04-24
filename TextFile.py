@@ -8,6 +8,7 @@ class TextFile:
   raw       : bytes
   error     : str
   content   : str = field(init=False)
+  size      : int = field(init=False)
   success   : str = field(init=False)
 
   def __post_init__(s: Self):
@@ -18,5 +19,7 @@ class TextFile:
     else:
       object.__setattr__(s, 'content', '')
       object.__setattr__(s, 'success', False)
+
+    object.__setattr__(s, 'size', len(s.raw))
 
   def __str__(s: Self)->str: return s.path
